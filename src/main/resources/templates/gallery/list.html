@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/template}"><!-- header/footer와 달리 content는 layout/template에 있는게 여기 들어옴 -->
+<th:block layout:fragment="content">    <!--thymeleaf로 넣는게 아니라 layout으로 넣는다ㅏ.-->
+    <div id="main">
+        <div class="mt-5">
+            <i class="fa-solid fa-images fa-2xl"> 갤러리</i>
+            <hr>
+        </div>
+    </div>
+</th:block>
+</html>
