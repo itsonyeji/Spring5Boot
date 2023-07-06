@@ -18,4 +18,22 @@ public class JoinController {
 
         return "join/agree";
     }
+    @GetMapping("/checkme")
+    public String checkme(){
+        logger.info("join/checkme 호출!");
+
+        return "join/checkme";
+    }
+    @GetMapping("/joinme")
+    public String joinme(){
+        logger.info("join/joinme 호출!");
+
+        return "join/joinme";
+    }
+    @GetMapping("/joinok")
+    public String joinok(){
+        logger.info("join/joinok 호출!");
+
+        return "join/joinok";
+    }
 }
