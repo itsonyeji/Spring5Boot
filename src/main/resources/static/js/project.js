@@ -15,7 +15,7 @@ noagree?.addEventListener('click', ()=>{
 
 
 // checkme
-let frm=document.forms.agreefrm2;/*이 방법은 주소창에 정보가 다 나옴*/
+let frm=document.forms.agreefrm2;/*주소창에 params를 넘기는 방법은 정보가 다 노출됨*/
 let checkbtn2=document.querySelector('#checkbtn2');
 let cancelbtn2=document.querySelector('#cancelbtn2');
 
