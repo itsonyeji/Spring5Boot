@@ -25,10 +25,8 @@ checkbtn2?.addEventListener('click', ()=>{
     else if(frm.jumin2.value==='') alert('나머지 주민번호를 입력하세요!');
     else if(!frm.infoagree.checked) alert('주민등록번호 처리 동의에 체크하세요!');
     else {
-        let params='?name=' +frm.name.value;    /*이 방법은 주소창에 정보가 다 나옴*/
-        params +='&jumin1='+frm.jumin1.value;
-        params +='&jumin2='+frm.jumin2.value;
-        location.href = '/join/joinme'+params;
+        frm.method='post';
+        frm.submit();
     }
 });
 cancelbtn2?.addEventListener('click', ()=>{
