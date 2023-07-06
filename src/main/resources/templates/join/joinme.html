@@ -91,7 +91,8 @@
                             <input type="text" name="zip2" id="zip2" class="form-control border-danger bg-light" readonly>
                         </div>
                         <div class="col-3">
-                            <button type="button" id="zipbtn" class="btn btn-dark">
+                            <button type="button" id="zipbtn" class="btn btn-dark"
+                                    data-bs-target="#zipmodal" data-bs-toggle="modal">
                                 <i class="fa-regular fa-circle-question"></i> 우편번호 찾기</button>
                         </div>
                     </div>  <!--zipcode-->
@@ -115,7 +116,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <select name="email" id="email" class="form-select border-danger">
+                            <select name="server" id="server" class="form-select border-danger">
                                 <option>선택하세요</option>
                                 <option>직접입력하기</option>
                                 <option>gmail.com</option>
@@ -158,9 +159,69 @@
                         <button type="button" id="cancelbtn" class="btn btn-danger"><i class="fa-regular fa-circle-xmark"></i> 입력취소</button>
                     </div>
                 </div> <!--button-->
-
+                <!--따로따로 떨어진 것들을 하나로 묶는 히든 폼-->
+                <input type="hidden" name="jumin" id="jumin">
+                <input type="hidden" name="zipcode" id="zipcode">
+                <input type="hidden" name="email" id="email">
+                <input type="hidden" name="phone" id="phone">
+                <input type="hidden" name="checkuid" id="checkuid">
             </form>
         </div><!-- terms -->
+        <div class="modal fade modal-lg" id="zipmodal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <!--열리고 닫을때 fade 효과--><!--close버튼 누를때만 닫히게-->
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">우편번호 찾기</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="zipfrm" id="zipfrm">
+                            <div class="row align-items-center justify-content-center">
+                                <label class="col-3 form-label text-danger text-end" for="dong">
+                                    검색하실 주소의<br> 동이름을 입력하세요
+                                </label>
+                                <div class="col-4">
+                                    <input type="text" name="dong" id="dong" class="form-control border-primary">
+                                </div>
+                                <div class="col-3">
+                                    <button type="button" class="btn btn-primary" id="findzipbtn">
+                                        <i class="fas fa-search"></i> 검색하기</button>
+                                </div>
+                                <hr class="w-75 mx-auto my-3">
+                                <p class="col-12 text-warning text-center">
+                                    지역의 읍/면/동의 이름을 공백없이 입력하신 후,
+                                    [검색하기] 버튼을 클릭하세요
+                                </p>
+                            </div>  <!--find zip-->
+                            <div class="row">
+                                <div class="col-8 offset-2">
+                                    <select class="form-select" id="addrlist" name="addrlist" size="10">
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                    <option>서울시 관악구 남부순환로 1820</option>
+                                </select>
+                                </div>
+                            </div> <!--show zip-->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="sendzip">
+                            <i class="fas fa-check-square"></i> 선택하고 닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>  <!--zipcode modal-->
+
     </div>
 </th:block>
 </html>
