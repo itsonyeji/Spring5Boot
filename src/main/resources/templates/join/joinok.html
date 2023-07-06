@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/template}"><!-- header/footer와 달리 content는 layout/template에 있는게 여기 들어옴 -->
+<th:block layout:fragment="content">    <!--thymeleaf로 넣는게 아니라 layout으로 넣는다ㅏ.-->
+    <div id="main">
+        <div class="mt-5">
+            <i class="fa-solid fa-user-pen fa-2xl"> 회원가입</i>
+            <hr>
+        </div>  <!-- title -->
+
+        <div class="mt-3">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active">
+                    <button type="button" disabled class="btn btn-success">이용약관</button>
+                </li>
+                <li class="breadcrumb-item">
+                    <button type="button" disabled class="btn btn-success">실명확인</button>
+                </li>
+                <li class="breadcrumb-item">
+                    <button type="button" disabled class="btn btn-light">정보입력</button>
+                </li>
+                <li class="breadcrumb-item">
+                    <button type="button" disabled class="btn btn-success">가입완료</button>
+                </li>
+            </ul>
+        </div> <!--breadcrumb-->
+        <div class="mt-5">
+            <h2>실명 확인</h2>
+            <small class="text-muted">  <!--글자 희미하게-->
+                안전하고 편리한 홈페이지 이용을 위해 회원님의 아이디와
+                비밀번호 관리에 주의해 주시기 바랍니다.
+            </small>
+            <hr>
+        </div>  <!--sub title-->
+
+        <div class="jumbotron bg-warning text-white col-10 offset-1 p-5 my-5">
+            <h1>🎉회원가입을 축하합니다!!🎉</h1>
+            <p>게시판 글작성, 쇼핑몰 이용등의 일부 서비스는
+                실명확인 후 이용하실 수 있습니다.<br>
+                실명확인 후에도 가입하신 아이디는 변경할 수 없습니다.</p>
+            <hr>
+            <p>회원가입 이후 아이디와 비밀번호로 일반회원으로
+                로그인하셔서 추가 인적사항등을 등록해주시기 바랍니다.<br>
+                Lorem Ipsom과 함께 즐거운 시간 되십시오</p>
+        </div><!-- info -->
+
+        <div class="text-center mb-5">
+            <button type="button" id="go2ids" class="btn btn-danger">
+                <i class="fas fa-home"></i> 메인으로 이동
+            </button>
+        </div> <!-- personal info -->
+    </div>
+</th:block>
+</html>
