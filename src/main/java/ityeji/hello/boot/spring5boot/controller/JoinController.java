@@ -39,7 +39,7 @@ public class JoinController {
             viewPage="redirect:/join/joinme";
         }
         return viewPage;
-    }
+    }   /*회원가입이 끝나면 세션은 다 없애기. 나중에 쓰레기 변수가 에러를 초래함*/
     @GetMapping("/joinme")
     public String joinme(){
         logger.info("join/joinme 호출!");
