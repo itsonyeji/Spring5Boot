@@ -8,7 +8,10 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)  /*자동으로 h2 데이터베이스를 사용하려고함. 내가 쓰는 데이터베이스로 조정해야함. replace속성으로*/
@@ -25,5 +28,15 @@ public class MemberMapperUnitTest {
         System.out.println(result);
         assertEquals(result, 1);
     }
+
+    @Test
+    @DisplayName("MemberMapper select Test")
+    void selectMember(){
+        List<Member> results = memberMapper.selectMember();
+        System.out.println(results);
+        assertNotNull(results);
+
+    }
+
 
 }
