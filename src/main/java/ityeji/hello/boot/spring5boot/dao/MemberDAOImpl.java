@@ -1,6 +1,7 @@
 package ityeji.hello.boot.spring5boot.dao;
 
 import ityeji.hello.boot.spring5boot.model.Member;
+import ityeji.hello.boot.spring5boot.model.Zipcode;
 import ityeji.hello.boot.spring5boot.mybatis.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
@@ -19,8 +20,6 @@ public class MemberDAOImpl implements MemberDAO{
     final MemberMapper memberMapper;
     /*sql이 아닌 MemberMapper로 가져옴*/
 
-    @Autowired private SqlSession sqlSession;
-
     @Override
     public int insertMember(Member m) {
         // insert("insert관련맵핑", 매개변수)
@@ -34,5 +33,11 @@ public class MemberDAOImpl implements MemberDAO{
     public List<Member> selectMember() {
 
         return memberMapper.selectMember();
+    }
+
+    @Override
+    public List<Zipcode> selectzip(String dong) {
+
+        return memberMapper.findZipcode(dong);  //실제 메서드 이름
     }
 }
