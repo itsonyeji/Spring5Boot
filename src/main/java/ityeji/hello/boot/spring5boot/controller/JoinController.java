@@ -1,8 +1,11 @@
 package ityeji.hello.boot.spring5boot.controller;
 
 import ityeji.hello.boot.spring5boot.model.Checkme;
+import ityeji.hello.boot.spring5boot.model.Member;
+import ityeji.hello.boot.spring5boot.service.MemberService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/join")
 public class JoinController {
 
+    @Autowired MemberService msrv;
     Logger logger= LogManager.getLogger(JoinController.class);
 
     @GetMapping("/agree")
@@ -45,6 +49,14 @@ public class JoinController {
         logger.info("join/joinme 호출!");
 
         return "join/joinme";
+    }
+    @PostMapping("/joinme")
+    public String joinmeok(Member m){
+        logger.info("join/joinmeok 호출!");
+        String viewPage="redirect:/join/fail";
+        if(msrv.saveMember(m))
+            viewPage="redirect:/join/joinok";
+        return viewPage;
     }
     @GetMapping("/joinok")
     public String joinok(){
