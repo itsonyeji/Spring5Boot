@@ -40,4 +40,11 @@ public class MemberDAOImpl implements MemberDAO{
 
         return memberMapper.findZipcode(dong);  //실제 메서드 이름
     }
+
+    @Override
+    public int selectOneUserid(String uid) {
+        return memberMapper.selectOneUserid(uid);
+    }
+
+
 }
