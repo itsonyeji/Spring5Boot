@@ -41,6 +41,9 @@ let zipmodal=document.querySelector('#zipmodal')
 
 let addrlist=document.querySelector('#addrlist');
 let sendzip=document.querySelector('#sendzip');
+
+let email3=document.querySelector('#email3');
+
 let modal=null; //우편번호 모달
 
 zipbtn?.addEventListener('click', () => {
@@ -93,4 +96,15 @@ sendzip?.addEventListener('click', () => {
         modal.hide();   //모달창 닫음
     }else
         alert('주소를 선택하세요!');
+});
+
+email3.addEventListener('click', () => {
+    let frm = document.forms.joinfrm;
+    if(email3.value === '직접입력하기'){
+        frm.email2.readOnly = false;
+        frm.email2.value='';
+    }else if(email3.value !== '선택하세요'){
+        frm.email2.readOnly=true;
+        frm.email2.value=email3.value;
+    }
 });
