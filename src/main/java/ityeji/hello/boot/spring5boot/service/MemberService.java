@@ -11,4 +11,6 @@ public interface MemberService {
     List<Member> readMember();
 
     String findzip(String dong) throws JsonProcessingException;
+
+    int checkuid(String uid);
 }

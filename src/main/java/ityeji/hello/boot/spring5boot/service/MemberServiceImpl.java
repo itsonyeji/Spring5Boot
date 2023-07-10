@@ -60,4 +60,9 @@ public class MemberServiceImpl implements MemberService {
         json=mapper.writeValueAsString(mdao.selectzip(dong));       //list형태로 dong을 받으면 json 형태로 바꿔줌
         return json;
     }
+
+    @Override
+    public int checkuid(String uid) {
+        return mdao.selectOneUserid(uid);
+    }
 }
