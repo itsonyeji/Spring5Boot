@@ -157,3 +157,30 @@ userid?.addEventListener('blur', ()=>{
         .then(text=>styleCheckuid(text));
 
 });
+
+// 회원정보 저장
+let joinbtn = document.querySelector('#joinbtn');
+joinbtn?.addEventListener('click', ()=>{
+    let frm = document.forms.joinfrm;
+    if(frm.userid.value === '')   alert('아이디를 입력하세요!');
+    else if(frm.passwd.value === '')   alert('비밀번호를 입력하세요!');
+    else if(frm.repasswd.value === '')   alert('비밀번호 확인을 입력하세요!');
+    else if(frm.zip1.value === ''|| frm.zip2.value === '')   alert('우편번호를 입력하세요!');
+    else if(frm.addr1.value === ''|| frm.addr2.value === '')   alert('주소를 입력하세요!');
+    else if(frm.email1.value === ''|| frm.email2.value === '')   alert('이메일을 입력하세요!');
+    else if(frm.phone2.value === ''|| frm.phone3.value === '')   alert('전화번호를 입력하세요!');
+    else if(grecaptcha.getResponse() === '')   alert('자동방지가입을 확인하세요!');
+    else if(checkuid.value === 'no')   alert('아이디 중복검사를 하세요!');
+    else{
+        frm.jumin.value=frm.jumin1.value+'-'+frm.jumin2.value;
+        frm.zipcode.value=frm.zip1.value+'-'+frm.zip2.value;
+        frm.email.value=frm.email1.value+'@'+frm.email2.value;
+        frm.phone.value=frm.phone1.value+'-'+frm.phone2.value+'-'+frm.phone3.value;
+
+        frm.method='post';
+        frm.submit();
+        alert('--');
+    }
+
+});
+
