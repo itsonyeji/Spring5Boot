@@ -34,10 +34,28 @@ cancelbtn2?.addEventListener('click', ()=>{
 });
 
 //joinme
-let zipbtn=document.querySelector('#findzipbtn');
+let fzipbtn=document.querySelector('#findzipbtn');
+let zipbtn=document.querySelector('#zipbtn');
 let dong=document.querySelector('#dong');
+let zipmodal=document.querySelector('#zipmodal')
+
 let addrlist=document.querySelector('#addrlist');
 let sendzip=document.querySelector('#sendzip');
+let modal=null; //우편번호 모달
+
+zipbtn?.addEventListener('click', () => {
+    while(addrlist.lastChild){
+        addrlist.removeChild(addrlist.lastChild);    //자식(addlist의 하위요소)을 지움    요소명.함수명(대상)
+    }   // 이전 검색 결과 지움
+    dong.value='';   // 이전 검색 키워드 지움
+
+    try{
+        //새로운 모달 창 생성
+        modal=new bootstrap.Modal(zipmodal, {});
+    }catch (e) { }
+    modal.show();
+
+});
 const showzipaddr = (jsons) => {
     jsons=JSON.parse(jsons); //문자열을 json객체로 변환
     let addr='';
@@ -47,7 +65,7 @@ const showzipaddr = (jsons) => {
     });
     addrlist.innerHTML=addr;
 };
-zipbtn?.addEventListener('click', ()=>{
+fzipbtn?.addEventListener('click', ()=>{
     if (dong.value === '') {
         alert('동이름을 입력하세요!');
         return;
@@ -71,6 +89,8 @@ sendzip?.addEventListener('click', () => {
         frm.zip1.value=zip.split('-')[0];
         frm.zip2.value=zip.split('-')[1];
         frm.addr1.value=vaddr;
+
+        modal.hide();   //모달창 닫음
     }else
         alert('주소를 선택하세요!');
 });
