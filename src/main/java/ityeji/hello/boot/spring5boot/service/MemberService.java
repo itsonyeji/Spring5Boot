@@ -3,6 +3,7 @@ package ityeji.hello.boot.spring5boot.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ityeji.hello.boot.spring5boot.model.Member;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface MemberService {
@@ -13,4 +14,6 @@ public interface MemberService {
     String findzip(String dong) throws JsonProcessingException;
 
     int checkuid(String uid);
+
+    Member readOneMember(Member m);
 }
