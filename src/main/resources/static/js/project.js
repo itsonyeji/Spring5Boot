@@ -46,6 +46,7 @@ let email3=document.querySelector('#email3');
 
 let modal=null; //우편번호 모달
 
+// 우편번호 검색 모달창 띄우기
 zipbtn?.addEventListener('click', () => {
     while(addrlist.lastChild){
         addrlist.removeChild(addrlist.lastChild);    //자식(addlist의 하위요소)을 지움    요소명.함수명(대상)
@@ -59,15 +60,23 @@ zipbtn?.addEventListener('click', () => {
     modal.show();
 
 });
+
+// 검색한 우편번호 결과 출력
 const showzipaddr = (jsons) => {
     jsons=JSON.parse(jsons); //문자열을 json객체로 변환
     let addr='';
     jsons.forEach(function (data, idx){ //json 반복처리
-        addr += `<option>${data['zipcode']} ${data['sido']} ${data['gugun']} ${data['dong']} ${data['bunji']}</option>`;
+        // 조소의 번지가 null인 경우 처리
+        //key가 bunji인 데이터값이 비었을때 빈칸으로.
+        let bunji = (data['bunji'] != null) ? data['bunji'] :'';
+
+        addr += `<option>${data['zipcode']} ${data['sido']} ${data['gugun']} ${data['dong']} ${bunji}</option>`;
         //key가 zipcode인 값을 출력
     });
     addrlist.innerHTML=addr;
 };
+
+// 우편번호 검색
 fzipbtn?.addEventListener('click', ()=>{
     if (dong.value === '') {
         alert('동이름을 입력하세요!');
@@ -78,6 +87,8 @@ fzipbtn?.addEventListener('click', ()=>{
         .then(text=>showzipaddr(text));
     //url을 받아오고, 문자로 바꿈.
 });
+
+// 주소 선택하고 닫기
 sendzip?.addEventListener('click', () => {
     let frm=document.forms.joinfrm
     let addr = addrlist.value;  //선택한 주소 항목
@@ -96,6 +107,7 @@ sendzip?.addEventListener('click', () => {
         alert('주소를 선택하세요!');
 });
 
+// 전자우편 주소 선택
 email3?.addEventListener('click', () => {
     let frm = document.forms.joinfrm;
     if(email3.value === '직접입력하기'){
@@ -114,8 +126,8 @@ dong?.addEventListener('keydown', (e)=>{
 });
 
 // 비밀번호 확인
-let pwd = document.joinfrm.passwd;
-let repwd = document.joinfrm.repasswd;
+let pwd = document.querySelector('#pwd');
+let repwd = document.querySelector('#repasswd');
 let pwdmsg = document.querySelector('#pwdmsg')
 
 repwd?.addEventListener('blur',() => {  //포커스가 벗어날때
@@ -129,8 +141,8 @@ repwd?.addEventListener('blur',() => {  //포커스가 벗어날때
 });
 
 // 아이디 중복 검사
-let userid = document.joinfrm.userid;
-let checkuid = document.joinfrm.checkuid;
+let userid = document.querySelector('#uid');
+let checkuid = document.querySelector('#checkuid');
 let uidmsg=document.querySelector('#uidmsg');
 const styleCheckuid = (chkuid) => {
     let umsg='사용 불가능한 아이디입니다!';
@@ -145,6 +157,8 @@ const styleCheckuid = (chkuid) => {
     uidmsg.innerText=umsg;
     return undefined;
 };
+
+// 아이디 중복 검사
 userid?.addEventListener('blur', ()=>{
     if (userid.value === '') {
         uidmsg.innerText='6~16 자의 영문 소문자, 숫자와 특수기호(_)만 사용할 수 있습니다';
@@ -184,3 +198,8 @@ joinbtn?.addEventListener('click', ()=>{
 
 });
 
+// joinok
+let go2idx = document.querySelector('#go2idx');
+go2idx?.addEventListener('click', ()=> {
+    location.href = '/';
+});
