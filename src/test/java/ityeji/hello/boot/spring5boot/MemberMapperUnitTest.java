@@ -23,7 +23,7 @@ public class MemberMapperUnitTest {
     @Test
     @DisplayName("MemberMapper insert Test")   /*명시될 test의 이름*/
     void insertMember(){
-        Member m = new Member(null, "", "", "", "","","","","",null);
+        Member m = new Member(null, "", "","", "", "","","","","",null);
         int result = memberMapper.insertMember(m);
         System.out.println(result);
         assertEquals(result, 1);

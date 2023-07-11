@@ -30,6 +30,7 @@ public class MemberControllerUnitTest {
                 .param("userid","abc123a")
                 .param("passwd","")
                 .param("name","")
+                .param("jumin","")
                 .param("email","abc123a")
                 .param("zipcode","")
                 .param("addr1","")
