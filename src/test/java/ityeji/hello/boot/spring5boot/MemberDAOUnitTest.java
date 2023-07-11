@@ -41,13 +41,25 @@ public class MemberDAOUnitTest {
     }
 
     @Test
-        @DisplayName("MemberMapper checkUserid Test")
-        void checkUserid(){
-            String uid="abc123";
-            int result=mdao.selectOneUserid(uid);
-            System.out.println(result);
-            assertEquals(result, 1);
-        }
+    @DisplayName("MemberDAO checkUserid Test")
+    void checkUserid(){
+        String uid="abc123";
+        int result=mdao.selectOneUserid(uid);
+        System.out.println(result);
+        assertEquals(result, 1);
+    }
+
+    @Test
+    @DisplayName("MemberDAO selectOneMember Test")
+    void selectOneMember(){
+        Member m = new Member();
+        m.setUserid("abc123");
+        m.setPasswd("987xyz");
+        Member result=mdao.selectOneMember(m);
+
+        System.out.println(result);
+        assertNotNull(result);
+    }
 
 
 }
