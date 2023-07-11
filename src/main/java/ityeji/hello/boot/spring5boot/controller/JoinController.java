@@ -46,8 +46,12 @@ public class JoinController {
         return viewPage;
     }   /*회원가입이 끝나면 세션은 다 없애기. 나중에 쓰레기 변수가 에러를 초래함*/
     @GetMapping("/joinme")
-    public String joinme(){
+    public String joinme(HttpSession sess){
         logger.info("join/joinme 호출!");
+
+        //세션 변수가 없다면 agree로 이동
+        if (sess.getAttribute("checkme") == null)
+            return "redirect:/join/agree";
 
         return "join/joinme";
     }
