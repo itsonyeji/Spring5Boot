@@ -46,5 +46,10 @@ public class MemberDAOImpl implements MemberDAO{
         return memberMapper.selectOneUserid(uid);
     }
 
+    @Override
+    public Member selectOneMember(Member m) {
+        return memberMapper.selectOneMember(m);
+    }
+
 
 }
