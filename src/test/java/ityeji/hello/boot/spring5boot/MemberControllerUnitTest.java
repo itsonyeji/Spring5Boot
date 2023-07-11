@@ -40,5 +40,17 @@ public class MemberControllerUnitTest {
                 .andDo(print());
     }
 
+    @Test
+    @DisplayName("MemberController login Test")   /*명시될 test의 이름*/
+    void login() throws Exception {
+        mvc.perform(post("/join/login")
+                .param("userid","abc123a")
+                .param("passwd","987xyz"))
+                .andExpect(status().is3xxRedirection())
+                .andDo(print());
+    }
+
+
+
 
 }
