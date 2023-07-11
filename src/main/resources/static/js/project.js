@@ -220,3 +220,10 @@ loginbtn?.addEventListener('click', ()=>{
        lgfrm.submit();
    }
 });
+
+// logout
+let lgoutbtn = document.querySelector('#lgoutbtn');
+
+lgoutbtn?.addEventListener('click', ()=>{
+    location.href='/join/logout';
+});
