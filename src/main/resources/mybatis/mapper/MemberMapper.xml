@@ -5,8 +5,8 @@
 
 <mapper namespace="ityeji.hello.boot.spring5boot.mybatis.MemberMapper"> <!--패키지이름.인터페이스이름-->
     <insert id="insertMember" parameterType="Member">
-        insert into member2 (userid, passwd, name, email, zipcode, addr1, addr2, phone)
-        values (#{userid},#{passwd},#{name},#{email},#{zipcode},#{addr1},#{addr2},#{phone});
+        insert into member2 (userid, passwd, name, jumin, email, zipcode, addr1, addr2, phone)
+        values (#{userid},#{passwd},#{name},#{jumin},#{email},#{zipcode},#{addr1},#{addr2},#{phone});
     </insert>
 
     <select id="selectMember" resultType="Member">
