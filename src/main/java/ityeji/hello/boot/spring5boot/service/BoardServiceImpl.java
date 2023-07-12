@@ -14,6 +14,7 @@ public class BoardServiceImpl implements BoardService{
     final BoardDAO bdao;
     @Override
     public boolean saveBoard(Board b) {
+
         return false;
     }
 
@@ -25,6 +26,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public Board readOneBoard(String bno) {
+
         return bdao.selectOneBoard(bno);
     }
 }
