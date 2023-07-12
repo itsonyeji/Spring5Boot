@@ -1,4 +1,4 @@
-package ityeji.hello.boot.spring5boot;
+package ityeji.hello.boot.spring5boot.member;
 
 import ityeji.hello.boot.spring5boot.dao.MemberDAO;
 import ityeji.hello.boot.spring5boot.dao.MemberDAOImpl;
