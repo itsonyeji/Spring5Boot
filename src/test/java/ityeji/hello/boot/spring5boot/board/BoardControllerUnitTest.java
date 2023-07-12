@@ -40,5 +40,18 @@ public class BoardControllerUnitTest {
                 .andDo(print());
     }
 
+    @Test
+    @DisplayName("BoardController write Test")
+    @Transactional
+    void write() throws Exception {
+        mvc.perform(post("/board/write")
+                        .param("title", "")
+                        .param("userid", "abc123")
+                        .param("contents", "")
+                        .param("ipaddr", ""))
+                .andExpect(status().is3xxRedirection())
+                .andDo(print());
+    }
+
 
 }
