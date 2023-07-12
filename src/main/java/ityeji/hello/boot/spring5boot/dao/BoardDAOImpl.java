@@ -21,9 +21,9 @@ public class BoardDAOImpl implements BoardDAO{
     }
 
     @Override
-    public List<Board> selectBoard() {
+    public List<Board> selectBoard(int stnum) {
 
-        return boardMapper.selectBoard();
+        return boardMapper.selectBoard(stnum);
     }
 
     @Override
