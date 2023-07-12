@@ -1,5 +1,6 @@
 package ityeji.hello.boot.spring5boot.controller;
 
+import ityeji.hello.boot.spring5boot.model.Board;
 import ityeji.hello.boot.spring5boot.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -34,6 +36,22 @@ public class BoardController {
         m.addAttribute("bd", bsrv.readOneBoard(bno));
 
         return "board/view";
+    }
+
+    @GetMapping("/write")
+    public String write(){
+        logger.info("board/write 호출!");
+
+        return "board/write";
+    }
+
+    @PostMapping("/write")
+    public String writeok(Board b){
+        logger.info("board/writeok 호출!");
+        String returnPage="redirect:/board/fail";
+        if(bsrv.saveBoard(b))
+            returnPage="redirect:/board/list/1";
+        return returnPage;
     }
 
 }
