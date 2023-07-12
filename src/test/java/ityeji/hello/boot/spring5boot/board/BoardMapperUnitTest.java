@@ -39,17 +39,15 @@ public class BoardMapperUnitTest {
         assertNotNull(results);
 
     }
-    /*@Test
-    @DisplayName("BoardMapper selectOneBoard Test")
-    void selectOneBoard(String bno){
-        Board b = new Board();
-        b.setBno("2");
+    @Test
+    @DisplayName("BoardMapper selectOne Test")
+    void selectOneBoard(){
+        String bno ="2659";
         Board result = boardMapper.selectOneBoard(bno);
 
         System.out.println(result);
         assertNotNull(result);
-
-        }*/
+        }
 
 
 }
