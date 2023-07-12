@@ -19,9 +19,9 @@ public class BoardController {
     Logger logger= LogManager.getLogger(BoardController.class);
 
     @GetMapping("/list")
-    public String list(Model m){
+    public String list(Model m, Integer cpg){
         logger.info("board/list 호출!");
-        m.addAttribute("bds", bsrv.readBoard());
+        m.addAttribute("bds", bsrv.readBoard(cpg));
 
         return "board/list";
     }
