@@ -11,7 +11,7 @@
     </insert>
 
     <select id="selectBoard" resultType="Board">
-        select bno, title, userid, regdate, thumbs, views from board2 order by bno desc /*limit #{stnum}, 25*/
+        select bno, title, userid, regdate, thumbs, views from board2 order by bno desc limit #{stnum}, 25
     </select>
 
     <select id="selectOneBoard" resultType="Board">
