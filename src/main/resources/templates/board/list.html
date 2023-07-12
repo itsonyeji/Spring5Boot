@@ -58,13 +58,13 @@
                             <th>56</th>
                             <th>127</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>오늘은 화요일이라구, 친구!</td>
-                            <td>운영자</td>
-                            <td>2023-05-01</td>
-                            <td>56</td>
-                            <td>127</td>
+                        <tr th:each="bd:${bds}"> <!-- bds에서 bd를 행 씩 가져온다 -->
+                            <td th:text="${bd.bno}">1</td>  <!-- 태그사이 자리에 있는걸 지우고 th:text="" 문자를 출력한다 -->
+                            <td th:text="${bd.title}">오늘은 화요일이라구, 친구!</td>
+                            <td th:text="${bd.userid}">운영자</td>
+                            <td th:text="${#strings.substring(bd.regdate, 0, 10)}">2023-05-01</td>  <!-- 날짜 중  0부터 n-1까지 10개 문자만 출력-->
+                            <td th:text="${bd.thumbs}">56</td>
+                            <td th:text="${bd.views}">127</td>
                         </tr>
                     </tbody>
                 </table>
