@@ -18,4 +18,9 @@
         select * from board2 where bno = #{bno}
     </select>
 
+    <update id="updateViewBoard">
+        update board2 set views=views+1 where bno = #{bno}
+    </update>
+
+
 </mapper>
