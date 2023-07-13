@@ -26,8 +26,11 @@ public class BoardDAOImpl implements BoardDAO{
         return boardMapper.selectBoard(stnum);
     }
 
+
     @Override
     public Board selectOneBoard(String bno) {
+
+        boardMapper.updateViewBoard(bno);
 
         return boardMapper.selectOneBoard(bno);
     }
