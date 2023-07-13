@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("bdao") /*MemberDAOImpl의 줄임*/
 @RequiredArgsConstructor    /*생성자를 자동으로 만들어줌*/
@@ -30,6 +31,11 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public int selectCountBoard() {
         return boardMapper.selectCountBoard();
+    }
+
+    @Override
+    public List<Board> selectFindBoard(Map<String, Object> params) {
+        return boardMapper.selectFindBoard(params);
     }
 
 
