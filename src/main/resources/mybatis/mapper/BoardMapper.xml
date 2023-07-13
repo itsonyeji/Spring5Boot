@@ -26,5 +26,22 @@
         select ceil(count(userid)/25) cntpg from board2;
     </select>
 
+    <!-- 동적 질의문으로 검색 기능 구현 -->
+    <!-- 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! -->
+    <!-- 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 -->
+    <select id="selectFindBoard" parameterType="map" resultType="Board">
+        select bno, title, userid, regdate, thumbs, views from board2
+
+        <if test="findtype != 'titcont'">
+            where ${findtype} like concat('%', #{findkey}, '%')   <!-- concat() : 합치기 -->
+        </if>
+
+        <if test="findtype == 'titcont'">
+            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+        </if>
+
+        order by bno desc limit #{stnum}, 25
+    </select>
+
 
 </mapper>
