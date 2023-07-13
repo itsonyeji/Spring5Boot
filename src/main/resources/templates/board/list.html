@@ -80,8 +80,8 @@
                             <li class="page-item"><a th:href="|${pglink}1|" class="page-link">처음</a></li>
                         </th:block>
                         <!-- '현재 페이지 -1'이 0보다 크면 '이전' 링크 활성 -->
-                        <li th:class="${(cpg-1 gt 0) ? 'page-item' : 'page-item disabled'}">
-                            <a th:href="|${pglink}${cpg-1}|" class="page-link">이전</a></li>
+                        <li th:class="${(cpg - 1 gt 0) ? 'page-item' : 'page-item disabled'}">
+                            <a th:href="|${pglink}${cpg - 1}|" class="page-link">이전</a></li>
 
                         <!-- numbers 숫자 함수. sequence로 숫자 1~10을 선언해서 그중 하나씩 빼온다.-->
                         <th:block th:each="i : ${#numbers.sequence(stpg, stpg+9)}">
