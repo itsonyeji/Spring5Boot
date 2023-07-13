@@ -22,5 +22,9 @@
         update board2 set views=views+1 where bno = #{bno}
     </update>
 
+    <select id="selectCountBoard">
+        select ceil(count(userid)/25) cntpg from board2;
+    </select>
+
 
 </mapper>
