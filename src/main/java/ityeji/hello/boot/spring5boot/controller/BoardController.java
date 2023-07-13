@@ -24,10 +24,20 @@ public class BoardController {
     @GetMapping("/list/{cpg}")
     public String list(Model m, @PathVariable Integer cpg){
         logger.info("board/list 호출!");
+
+
         m.addAttribute("bds", bsrv.readBoard(cpg));
         m.addAttribute("cpg", cpg);
         m.addAttribute("cntpg", bsrv.countBoard());   /* countpage 총페이지수 */
         m.addAttribute("stpg", ((cpg-1)/10)*10+1);
+
+        //만일, 현재페이지가 총페이지 수보다 크면 1페이지로 강제 이동
+        // 만일, cpg가 cntpg보다 크다면 1페이지로 강제 이동
+        if(cpg > (int)m.getAttribute("cntpg"))  {
+            /*(int)m.getAttribute("cntpg") 대신  써도됨? ㄴㄴ 호출을 두번하게됨 */
+            /* model로 가져온 값은 object형태 */
+            return "redirect:/board/list/1";
+        }
 
 
         return "board/list";
