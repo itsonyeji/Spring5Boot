@@ -26,6 +26,7 @@ public class BoardController {
         logger.info("board/list 호출!");
         m.addAttribute("bds", bsrv.readBoard(cpg));
         m.addAttribute("cpg", cpg);
+        m.addAttribute("cntpg", bsrv.countBoard());   /* countpage 총페이지수 */
 
         return "board/list";
     }
