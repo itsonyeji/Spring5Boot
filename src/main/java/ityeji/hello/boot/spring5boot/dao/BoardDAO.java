@@ -9,4 +9,5 @@ public interface BoardDAO {
     Board selectOneBoard(String bno);
 
     List<Board> selectBoard(int stnum);
+    int selectCountBoard();
 }
