@@ -15,4 +15,6 @@ public interface BoardService {
     int countBoard();
 
     List<Board> readFindBoard(Integer cpg, String ftype, String fkey);
+
+    int countFindBoard(String ftype, String fkey);
 }
