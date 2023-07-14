@@ -79,5 +79,17 @@ public class BoardServiceUnitTest {
 
     }
 
+    @Test
+    @DisplayName("BoardService countFindBoard Test")
+    void countFindBoard(){
+        String ftype ="title";
+        String fkey ="로봇";
+
+        int result = bsrv.countFindBoard(ftype, fkey);
+        assertNotNull(result);
+
+    }
+
+
 
 }
