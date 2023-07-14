@@ -1,6 +1,7 @@
 package ityeji.hello.boot.spring5boot.dao;
 
 import ityeji.hello.boot.spring5boot.model.Pds;
+import ityeji.hello.boot.spring5boot.model.PdsAttach;
 import ityeji.hello.boot.spring5boot.mybatis.PdsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,10 @@ public class PdsDAOImpl implements PdsDAO{
             cnt=pdsMapper.lastPdsPno();
 
         return cnt;
+    }
+
+    @Override
+    public int insertPdsdAttach(PdsAttach pa) {
+        return pdsMapper.insertPdsAttach(pa);
     }
 }
