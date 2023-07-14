@@ -272,3 +272,16 @@ cancelbtn3?.addEventListener('click', ()=>{
     location.href="/board/list/1";
 });
 
+// board find
+let findtype = document.querySelector('#findtype');
+let findkey = document.querySelector('#findkey');
+let findbtn=document.querySelector('#findbtn');
+findbtn?.addEventListener('click', ()=>{
+   if(findkey.value ==='') alert('검색어를 입력하세요!');
+   else{
+       location.href=`/board/find/${findtype.value}/${findkey.value}/1`;
+   }
+});
+
+
+
