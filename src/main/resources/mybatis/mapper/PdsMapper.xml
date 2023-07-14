@@ -13,58 +13,65 @@
     <select id="lastPdsPno">
 #         select AUTO_INCREMENT -1 pno from information_schema.TABLES where TABLE_NAME='pds';
 
-        select last_insert_id() from pds;
-    </select>
-<!--
-
-    <select id="selectPds" resultType="Pds">
-        select bno, title, userid, regdate, thumbs, views from pds order by bno desc limit #{stnum}, 25
+        select last_insert_id() from pds limit 1,1;
     </select>
 
-    <select id="selectOnePds" resultType="Pds">
-        select * from pds where bno = #{bno}
-    </select>
+    <insert id="insertPdsAttach" parameterType="PdsAttach">
+        insert into pdsattach (pno, fname, ftype, fsize)
+        values (#{pno},#{fname},#{ftype},#{fsize})
+    </insert>
 
-    <update id="updateViewPds">
-        update pds set views=views+1 where bno = #{bno}
-    </update>
 
-    <select id="selectCountPds">
-        select ceil(count(userid)/25) cntpg from pds;
-    </select>
+    <!--
 
-    &lt;!&ndash; 동적 질의문으로 검색 기능 구현 &ndash;&gt;
-    &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
-    &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
-    <select id="selectFindPds" parameterType="map" resultType="Pds">
-        select bno, title, userid, regdate, thumbs, views from pds
+        <select id="selectPds" resultType="Pds">
+            select bno, title, userid, regdate, thumbs, views from pds order by bno desc limit #{stnum}, 25
+        </select>
 
-        <if test="findtype != 'titcont'">
-            where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
-        </if>
+        <select id="selectOnePds" resultType="Pds">
+            select * from pds where bno = #{bno}
+        </select>
 
-        <if test="findtype == 'titcont'">
-            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
-        </if>
+        <update id="updateViewPds">
+            update pds set views=views+1 where bno = #{bno}
+        </update>
 
-        order by bno desc limit #{stnum}, 25
-    </select>
+        <select id="selectCountPds">
+            select ceil(count(userid)/25) cntpg from pds;
+        </select>
 
-    &lt;!&ndash; 동적 질의문으로 검색 기능 구현2 &ndash;&gt;
-    &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
-    &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
-    <select id="countFindPds" parameterType="map">&lt;!&ndash; 결과는 자동 추론이라 resultType을 굳이 안써도됨 &ndash;&gt;
-        select ceil(count(bno) / 25) cntfpg from pds
+        &lt;!&ndash; 동적 질의문으로 검색 기능 구현 &ndash;&gt;
+        &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
+        &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
+        <select id="selectFindPds" parameterType="map" resultType="Pds">
+            select bno, title, userid, regdate, thumbs, views from pds
 
-        <if test="findtype != 'titcont'">
-            where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
-        </if>
+            <if test="findtype != 'titcont'">
+                where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
+            </if>
 
-        <if test="findtype == 'titcont'">
-            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
-        </if>
-    </select>
--->
+            <if test="findtype == 'titcont'">
+                where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+            </if>
+
+            order by bno desc limit #{stnum}, 25
+        </select>
+
+        &lt;!&ndash; 동적 질의문으로 검색 기능 구현2 &ndash;&gt;
+        &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
+        &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
+        <select id="countFindPds" parameterType="map">&lt;!&ndash; 결과는 자동 추론이라 resultType을 굳이 안써도됨 &ndash;&gt;
+            select ceil(count(bno) / 25) cntfpg from pds
+
+            <if test="findtype != 'titcont'">
+                where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
+            </if>
+
+            <if test="findtype == 'titcont'">
+                where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+            </if>
+        </select>
+    -->
 
 
 </mapper>
