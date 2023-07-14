@@ -43,5 +43,20 @@
         order by bno desc limit #{stnum}, 25
     </select>
 
+    <!-- 동적 질의문으로 검색 기능 구현2 -->
+    <!-- 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! -->
+    <!-- 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 -->
+    <select id="countFindBoard" parameterType="map"><!-- 결과는 자동 추론이라 resultType을 굳이 안써도됨 -->
+        select ceil(count(bno) / 25) cntfpg from board2
+
+        <if test="findtype != 'titcont'">
+            where ${findtype} like concat('%', #{findkey}, '%')   <!-- concat() : 합치기 -->
+        </if>
+
+        <if test="findtype == 'titcont'">
+            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+        </if>
+    </select>
+
 
 </mapper>
