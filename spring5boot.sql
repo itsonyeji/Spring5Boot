@@ -50,3 +50,38 @@ values ('트랜스포머 로봇 등장...도로 달리다 변신해 비행 가�
 
 -- 외래키로 설정한 값은 레퍼런스한 테이블에 있는 값을 이용해야한다.
 select count(userid) cnt, ceil(count(userid)/25) pages from board2;
+
+select * from board2
+where title like '%로봇%';
+
+-- pds
+create table pds(
+    pno         int             auto_increment,
+    title       varchar(100)    not null,
+    userid      varchar(18)     not null,
+    regdate     datetime        default  current_timestamp,
+    thumbs      int             default 0,
+    views       int             default 0,
+    contents    text            not null,
+    ipaddr      varchar(15)     not null,
+    primary key (pno)
+);
+
+create table pdsattach (
+    pano        int             auto_increment,
+    pno         int             not null,   -- 게시글 번호
+    fname       varchar(200)    not null,   -- uuid(식별코드) 포함
+    ftype       varchar(3)      not null,
+    fsize       float           not null,
+    fdown       int             default 0,
+    primary key (pano)
+);
+
+alter table pds
+    add constraint fkpuid
+        foreign key (userid) references member2 (userid);
+-- 제약조건을 따로 작성해야 여러 테이블에 대한 관계를 설정이 편리하다.
+
+alter table pdsattach
+    add constraint fkpno
+        foreign key (pno) references pds (pno);
