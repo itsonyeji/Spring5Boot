@@ -19,11 +19,11 @@ public class PdsUtils {
     Logger logger= LogManager.getLogger(PdsUtils.class);
 
     //첨부파일 저장 위치
-    @Value("${saveDir") private String saveDir;
+    @Value("${saveDir}") private String saveDir;
     public PdsAttach processUpload(MultipartFile attach){
         PdsAttach pa = new PdsAttach();
 
-        // 업로드할 파일 정보 알아내기 - 첨부파일명
+        // 업로드할 파일 정보 알아내기 - 첨부파일명. 앞에 식별코드
         pa.setFname(makeUUID() + attach.getOriginalFilename());
 
         // 업로드할 파일 정보 알아내기 - 확장자 추출
@@ -31,7 +31,7 @@ public class PdsUtils {
         // 파일명.split(".")[1] : 1은 뒤에 조각, 0은 앞에 조각 - 이건 가운데 다른 점이 들어가면 못씀.
         // 파일명.substring(lastIndexOf(".")+1) - 이걸 써야 뒤에 점을 기준으로 자름.
         int pos = pa.getFname().lastIndexOf(".") + 1;   //점을 기준으로 뒤에 것 위치를 알아냄.
-        pa.setFtype(pa.getFname().substring(pos));      // 뒤에 기준으로 자르기
+        pa.setFtype(pa.getFname().substring(pos));      // 뒤에 기준으로 자르기. setFtype에 저장
 
         // 업로드할 파일 정보 알아내기 - 파일 크기
         pa.setFsize(attach.getSize()/1024+"");      //byte 크기라 자리수가 크기때문에 1024로 나눠 mb로 만듦
@@ -40,7 +40,7 @@ public class PdsUtils {
         String savepath = saveDir + pa.getFname();
 
         try {
-            attach.transferTo(new File(savepath));
+            attach.transferTo(new File(savepath));      //파일 업로드
         } catch (IOException e) {
             logger.error("첨부파일 처리중 오류 발생!!");
             e.printStackTrace();
