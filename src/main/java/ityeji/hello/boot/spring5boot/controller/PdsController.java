@@ -7,7 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,12 +24,24 @@ public class PdsController {
     Logger logger= LogManager.getLogger(PdsController.class);
     final PdsService psrv;
 
-    @GetMapping("/list")
-    public String list(){
+    @GetMapping("/list/{cpg}")
+    public String list(Model m, @PathVariable Integer cpg){
         logger.info("pds/list 호출!");
 
-        return "list-";
+
+        m.addAttribute("pds", psrv.readPds(cpg));
+        m.addAttribute("cpg", cpg);
+        m.addAttribute("cntpg", psrv.countPds());   /* countpage 총페이지수 */
+        m.addAttribute("stpg", ((cpg-1)/10)*10+1);
+
+        if(cpg > (int)m.getAttribute("cntpg"))  {
+            return "redirect:/pds/list/1";
+        }
+
+
+        return "pds/list";
     }
+
     @GetMapping("/write")
     public String write(){
         logger.info("pds/write 호출!");
@@ -36,7 +50,7 @@ public class PdsController {
     }
 
     @PostMapping("/write")
-    public String writeok(Pds p, MultipartFile attach){ /* attach는 multipartfile 형태로 가져옴 */
+    public String writeok(Pds p, MultipartFile attach){ /* attach는 multipartfile 형태(binary)로 가져옴 */
         logger.info("pds/writeok 호출!");
         String returnPage="redirect:/pds/fail";
 
@@ -44,7 +58,7 @@ public class PdsController {
         int pno = psrv.newPds(p);
 
         // 알아낸 글번호를 이용해서 첨부파일 처리 (DB 저장, 업로드)
-        if(!attach.isEmpty()) {  // 첨부파일 존재한다면
+        if(!attach.isEmpty()) {  // 첨부파일 존재한다면 지정한 위치에 파일 저장.
             psrv.newPdsAttach(attach, pno);
             returnPage = "redirect:/pds/list/1";
         }
@@ -52,5 +66,14 @@ public class PdsController {
 
         return returnPage;
     }
+
+    @GetMapping("/view/{pno}")
+    public String view(Model m, @PathVariable String pno){
+        logger.info("pds/view 호출!");
+        m.addAttribute("p", psrv.readOnePds(pno));
+
+        return "pds/view";
+    }
+
 
 }
