@@ -4,6 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ityeji.hello.boot.spring5boot.mybatis.PdsMapper"> <!--패키지이름.인터페이스이름-->
+    <!-- join result -->
+    <resultMap id="pa" type="PdsAttach">
+        <result column="fname" property="fname"/>
+        <result column="ftype" property="ftype"/>
+        <result column="fsize" property="fsize"/>
+        <result column="fdown" property="fdown"/>
+    </resultMap>
+    <resultMap id="ppa" type="Pds">
+        <result column="pno" property="pno"/>
+        <result column="title" property="title"/>
+        <result column="userid" property="userid"/>
+        <result column="regdate" property="regdate"/>
+        <result column="thumbs" property="thumbs"/>
+        <result column="views" property="views"/>
+        <result column="contents" property="contents"/>
+        <result column="ipaddr" property="ipaddr"/>
+
+        <collection property="pa" resultMap="pa"/>  <!-- property는 변수이름. -->
+    </resultMap>
+
     <insert id="insertPds" parameterType="Pds">
         insert into pds
             (title, userid, contents, ipaddr)
@@ -21,57 +41,56 @@
         values (#{pno},#{fname},#{ftype},#{fsize})
     </insert>
 
+    <select id="selectPds" resultType="Pds">
+        select pno, title, userid, regdate, thumbs, views from pds order by pno desc limit #{stnum}, 25
+    </select>
 
-    <!--
+    <!-- pds, pdsattach를 합친 가상테이블 ppa -->
+    <select id="selectOnePds" resultMap="ppa">
+        select * from ppa where pno = #{pno}
+    </select>
 
-        <select id="selectPds" resultType="Pds">
-            select bno, title, userid, regdate, thumbs, views from pds order by bno desc limit #{stnum}, 25
-        </select>
+    <select id="selectCountPds">
+        select ceil(count(pno)/25) cntpg from pds;
+    </select>
 
-        <select id="selectOnePds" resultType="Pds">
-            select * from pds where bno = #{bno}
-        </select>
+    <!--<update id="updateViewPds">
+        update pds set views=views+1 where bno = #{bno}
+    </update>
 
-        <update id="updateViewPds">
-            update pds set views=views+1 where bno = #{bno}
-        </update>
 
-        <select id="selectCountPds">
-            select ceil(count(userid)/25) cntpg from pds;
-        </select>
+    &lt;!&ndash; 동적 질의문으로 검색 기능 구현 &ndash;&gt;
+    &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
+    &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
+    <select id="selectFindPds" parameterType="map" resultType="Pds">
+        select bno, title, userid, regdate, thumbs, views from pds
 
-        &lt;!&ndash; 동적 질의문으로 검색 기능 구현 &ndash;&gt;
-        &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
-        &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
-        <select id="selectFindPds" parameterType="map" resultType="Pds">
-            select bno, title, userid, regdate, thumbs, views from pds
+        <if test="findtype != 'titcont'">
+            where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
+        </if>
 
-            <if test="findtype != 'titcont'">
-                where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
-            </if>
+        <if test="findtype == 'titcont'">
+            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+        </if>
 
-            <if test="findtype == 'titcont'">
-                where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
-            </if>
+        order by bno desc limit #{stnum}, 25
+    </select>
 
-            order by bno desc limit #{stnum}, 25
-        </select>
+    &lt;!&ndash; 동적 질의문으로 검색 기능 구현2 &ndash;&gt;
+    &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
+    &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
+    <select id="countFindPds" parameterType="map">&lt;!&ndash; 결과는 자동 추론이라 resultType을 굳이 안써도됨 &ndash;&gt;
+        select ceil(count(bno) / 25) cntfpg from pds
 
-        &lt;!&ndash; 동적 질의문으로 검색 기능 구현2 &ndash;&gt;
-        &lt;!&ndash; 단, 컬럼명이나 테이블명에는 #{}이 아닌 ${}를 사용! &ndash;&gt;
-        &lt;!&ndash; 변수에 값이 정해지지 않았을때 parameterMap="map"를 쓴다 &ndash;&gt;
-        <select id="countFindPds" parameterType="map">&lt;!&ndash; 결과는 자동 추론이라 resultType을 굳이 안써도됨 &ndash;&gt;
-            select ceil(count(bno) / 25) cntfpg from pds
+        <if test="findtype != 'titcont'">
+            where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
+        </if>
 
-            <if test="findtype != 'titcont'">
-                where ${findtype} like concat('%', #{findkey}, '%')   &lt;!&ndash; concat() : 합치기 &ndash;&gt;
-            </if>
-
-            <if test="findtype == 'titcont'">
-                where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
-            </if>
-        </select>
-    -->
+        <if test="findtype == 'titcont'">
+            where title like concat('%', #{findkey}, '%') or contents like concat('%', #{findkey}, '%')
+        </if>
+    </select>
+-->
 
 
 </mapper>
