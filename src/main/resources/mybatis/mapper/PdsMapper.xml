@@ -54,6 +54,12 @@
         select ceil(count(pno)/25) cntpg from pds;
     </select>
 
+    <!-- resultType은 클래스라 대문자. 테이블은 소문자-->
+    <select id="selectOnePdsAttach" resultType="PdsAttach">
+        select * from pdsattach where pno = #{pno}
+    </select>
+
+
     <!--<update id="updateViewPds">
         update pds set views=views+1 where bno = #{bno}
     </update>
