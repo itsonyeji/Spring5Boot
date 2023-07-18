@@ -27,14 +27,14 @@
                 <tr class="vinfo"><td th:text="${p.userid}"></td>
                     <td class="text-end" th:text="|${p.regdate} / ${p.thumbs} / ${p.views}|">작성일/추천수/조회수</td></tr>
                 <tr><td class="vcont" colspan="2" th:text="${p.contents}">본문글</td></tr>
-            </table>
 
-            <tr>
-                <td class="vinfo" colspan="2">
-                    <a th:href="|/pds/down/${p.pno}|" th:text="${p.pa.fname}">파일명</a>
-                    <span th:text="|${p.pa.fsize} KB/${p.pa.fdown} 회 다운로드|">파일정보</span>
-                </td>
-            </tr>
+                <tr>
+                    <td class="vinfo" colspan="2">
+                        <a th:href="|/pds/down/${p.pno}|" th:text="${p.pa.fname}">파일명</a>
+                        <span th:text="|${p.pa.fsize} KB/${p.pa.fdown} 회 다운로드|">파일정보</span>
+                    </td>
+                </tr>
+            </table>
 
         </div> <!-- 본문글 -->
 
