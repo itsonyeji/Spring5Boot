@@ -6,6 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,6 +77,21 @@ public class PdsController {
         m.addAttribute("p", psrv.readOnePds(pno));
 
         return "pds/view";
+    }
+
+    @GetMapping("/down/{pno}")
+    public ResponseEntity<Resource> down(@PathVariable String pno){
+        logger.info("pds/down 호출!");
+
+        // 업로드한 파일에 대한 파일명 알아냄
+        String fname=psrv.readOnePdsAttach(pno);
+
+        // 알아낸 파일명을 이용해서 헤더와 리소스 객체 생성
+        Map<String, Object> objs = psrv.getHeaderResource(fname);
+
+        return ResponseEntity.ok()
+                .headers((HttpHeaders) objs.get("header"))
+                .body((UrlResource)objs.get("resource"));
     }
 
 
