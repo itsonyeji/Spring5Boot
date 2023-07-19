@@ -125,7 +125,7 @@ values('987xyz', '댓글3', '3', '11');
 insert into pdscomments (userid, comments, ref, pno)
 values('ityeji', '대댓글1', '2', '11');
 insert into pdscomments (userid, comments, ref, pno)
-values('987xyz', '댓글4', '4', '11');
+values('987xyz', '댓글4', '8', '11');
 
 select * from pdscomments;
 select * from pdscomments where pno=11 order by ref;
