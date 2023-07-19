@@ -15,11 +15,11 @@ noagree?.addEventListener('click', ()=>{
 
 
 // checkme
-let frm=document.forms.agreefrm2;/*주소창에 params를 넘기는 방법은 정보가 다 노출됨*/
 let checkbtn2=document.querySelector('#checkbtn2');
 let cancelbtn2=document.querySelector('#cancelbtn2');
 
 checkbtn2?.addEventListener('click', ()=>{
+    let frm=document.forms.agreefrm2;/*주소창에 params를 넘기는 방법은 정보가 다 노출됨*/
     if(frm.name.value==='') alert('이름을 입력하세요!');
     else if(frm.jumin1.value==='') alert('주민번호를 입력하세요!');
     else if(frm.jumin2.value==='') alert('나머지 주민번호를 입력하세요!');
@@ -205,26 +205,4 @@ go2idx?.addEventListener('click', ()=> {
 });
 
 
-// login
-let loginbtn = document.querySelector("#loginbtn");
-let lguid = document.querySelector("#userid");
-let lgpwd = document.querySelector("#passwd");
-let lgfrm = document.querySelector('#lgnfrm');
-
-loginbtn?.addEventListener('click', ()=>{
-   if(lguid.value=='')  alert('아이디를 입력하세요!');
-   else if(lgpwd.value=='')  alert('비밀번호를 입력하세요!');
-   else{
-       lgfrm.method='post';
-       lgfrm.action='/join/login'
-       lgfrm.submit();
-   }
-});
-
-// logout
-let lgoutbtn = document.querySelector('#lgoutbtn');
-
-lgoutbtn?.addEventListener('click', ()=>{
-    location.href='/join/logout';
-});
 
