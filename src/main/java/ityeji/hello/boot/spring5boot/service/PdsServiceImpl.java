@@ -3,6 +3,7 @@ package ityeji.hello.boot.spring5boot.service;
 import ityeji.hello.boot.spring5boot.dao.PdsDAO;
 import ityeji.hello.boot.spring5boot.model.Pds;
 import ityeji.hello.boot.spring5boot.model.PdsAttach;
+import ityeji.hello.boot.spring5boot.model.PdsComment;
 import ityeji.hello.boot.spring5boot.utils.PdsUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -70,5 +71,22 @@ public class PdsServiceImpl implements PdsService{
         // 다운로드할 파일의 본체body 가져옴
         objs.put("resource", pdsUtils.getResource(fname));
         return objs;
+    }
+
+    @Override
+    public boolean newPdsComment(PdsComment pc) {
+
+
+        return (pdao.insertPdsComment(pc)>0) ? true : false;
+    }
+
+    @Override
+    public List<PdsComment> readPdsComment(String pno) {
+        return pdao.selectPdsComment(pno);
+    }
+
+    @Override
+    public boolean newPdsReply(PdsComment pc) {
+        return (pdao.insertPdsReply(pc)>0) ? true : false;
     }
 }
