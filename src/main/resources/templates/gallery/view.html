@@ -29,13 +29,13 @@
                 <tr><td class="vcont" colspan="2">
                     <p th:text="${g.contents}">본문글</p>
                     <th:block th:each="img : ${#strings.arraySplit(g.ga.fname,';')}">
-                            <img th:src="|http://localhost/cdn/${img}|">
+                            <img th:src="|http://localhost/cdn/${img}|" class="img-fluid">  <!-- 이미지 사이즈 조절 -->
                     </th:block>
                 </td></tr>
                 <tr>
                     <td class="vinfo" colspan="2" th:with="fsizes = ${#strings.arraySplit(g.ga.fsize, ';')}">
-                        <th:block th:each="f:${fsizes}">
-                            <p th:text="|${f}KB|"></p>
+                        <th:block th:each="fn, stat:${#strings.arraySplit(g.ga.fname,';')}">
+                            <div th:text="|${fn} (${fsizes[__${stat.index}__]}KB)|"></div>  <!-- $안에 $쓰려면 앞뒤로 _언더바두개씩 -->
                         </th:block>
                     </td>
                 </tr>
