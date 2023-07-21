@@ -130,6 +130,45 @@ values('987xyz', '댓글4', '8', '11');
 select * from pdscomments;
 select * from pdscomments where pno=11 order by ref;
 
+-- gallery
+create table gallery(
+        gno         int             auto_increment,
+        title       varchar(100)    not null,
+        userid      varchar(18)     not null,
+        regdate     datetime        default  current_timestamp,
+        thumbs      int             default 0,
+        views       int             default 0,
+        contents    text            not null,
+        ipaddr      varchar(15)     not null,
+        primary key (gno)
+);
+-- galattach
+create table galattach (
+       gano        int             auto_increment,
+       gno         int             not null,   -- 게시글 번호
+       fname       varchar(1024)   not null,   -- uuid(식별코드) 포함
+       fsize       varchar(256)    not null,
+       primary key (gano)
+);
+
+alter table gallery
+    add constraint fkguid
+        foreign key (userid) references member2 (userid);
+-- 제약조건을 따로 작성해야 여러 테이블에 대한 관계를 설정이 편리하다.
+
+alter table galattach
+    add constraint fkgno
+        foreign key (gno) references gallery (gno);
+
+
+
+
+
+
+
+
+
+
 
 
 
