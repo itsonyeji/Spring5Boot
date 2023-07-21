@@ -37,8 +37,8 @@
         values (#{gno},#{fname},#{fsize})
     </insert>
 
-    <select id="selectGallery" resultType="Gallery">
-        select gno, title, userid, regdate, thumbs, views from gallery order by gno desc limit #{stnum}, 25
+    <select id="selectGallery" resultMap="gga">
+        select * from gga0 order by gno desc limit #{stnum}, 25
     </select>
 
     <!-- gallery, galleryattach를 합친 가상테이블 gga -->
