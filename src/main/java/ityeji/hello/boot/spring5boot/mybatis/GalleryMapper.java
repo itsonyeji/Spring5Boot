@@ -1,5 +1,7 @@
 package ityeji.hello.boot.spring5boot.mybatis;
 
+import ityeji.hello.boot.spring5boot.model.GalAttach;
+import ityeji.hello.boot.spring5boot.model.Gallery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public interface GalleryMapper {
     int selectCountGallery();
 
     GalAttach selectOneGalAttach(String gno);
+
+    int lastGalGno();
 
     /*int insertGalleryComment(GalleryComment pc);
 

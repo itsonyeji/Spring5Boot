@@ -27,10 +27,14 @@
             (title, userid, contents, ipaddr)
         values (#{title},#{userid},#{contents},#{ipaddr})
     </insert>
-    
+
+    <select id="lastGalGno">
+        select AUTO_INCREMENT -1 gno from information_schema.TABLES where TABLE_NAME='gallery'
+    </select>
+
     <insert id="insertGalAttach" parameterType="GalAttach">
-        insert into galleryattach (gno, fname, ftype, fsize)
-        values (#{gno},#{fname},#{ftype},#{fsize})
+        insert into galattach (gno, fname, fsize)
+        values (#{gno},#{fname},#{fsize})
     </insert>
 
     <select id="selectGallery" resultType="Gallery">
